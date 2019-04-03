@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/museum'
 require './lib/exhibit'
+require './lib/patron'
 class MuseumTest < Minitest::Test
   def setup
     @denver = Museum.new("Denver Museum of Nature and Science")
@@ -33,6 +34,10 @@ class MuseumTest < Minitest::Test
     @bob.add_interest("Dead Sea Scrolls")
     @bob.add_interest("Gems and Minerals")
     @sally.add_interest("IMAX")
+
+    @denver.add_exhibit(@gems_and_minerals)
+    @denver.add_exhibit(@dead_sea_scrolls)
+    @denver.add_exhibit(@imax)
 
     assert_equal [@gems_and_minerals, @dead_sea_scrolls], @denver.recommend_exhibits(@bob)
     assert_equal [@imax], @denver.recommend_exhibits(@sally)
