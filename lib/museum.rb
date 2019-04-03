@@ -19,6 +19,21 @@ class Museum
 
   def admit(patron)
     patrons << patron
+    attend(patron)
+  end
+
+  def attend(patron)
+    patron_exhibits = recommend_exhibits(patron)
+    if patron_exhibits.length > 0
+      cost_sorted = patron_exhibits.sort do |exhibit_a, exhibit_b|
+        exhibit_b.cost <=> exhibit_a.cost
+      end
+      cost_sorted.each do |exhibit|
+        if exhibit.cost <= patron.spending_money
+          patron.spend(exhibit)
+        end
+      end
+    end
   end
 
   def patrons_by_exhibit_interest

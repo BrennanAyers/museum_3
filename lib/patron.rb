@@ -10,4 +10,8 @@ class Patron
   def add_interest(interest)
     interests << interest
   end
+
+  def spend(exhibit)
+    @spending_money -= exhibit.cost
+  end
 end
