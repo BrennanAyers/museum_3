@@ -18,4 +18,12 @@ class MuseumTest < Minitest::Test
     assert_equal "Denver Museum of Nature and Science", @denver.name
     assert_equal [], @denver.exhibits
   end
+
+  def test_it_can_add_exhibits
+    @denver.add_exhibit(@gems_and_minerals)
+    @denver.add_exhibit(@dead_sea_scrolls)
+    @denver.add_exhibit(@imax)
+
+    assert_equal [@gems_and_minerals, @dead_sea_scrolls, @imax], @denver.exhibits
+  end
 end
