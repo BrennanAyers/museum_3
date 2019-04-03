@@ -9,7 +9,7 @@ class MuseumTest < Minitest::Test
     @gems_and_minerals = Exhibit.new("Gems and Minerals", 0)
     @dead_sea_scrolls = Exhibit.new("Dead Sea Scrolls", 10)
     @imax = Exhibit.new("IMAX", 15)
-    @bob = Patron.new("Bob", 20)
+    @bob = Patron.new("Bob", 10)
     @sally = Patron.new("Sally", 20)
     @tj = Patron.new("TJ", 7)
   end
@@ -81,5 +81,18 @@ class MuseumTest < Minitest::Test
     @denver.admit(@tj)
 
     assert_equal 7, @tj.spending_money
+  end
+
+  def test_a_patron_will_attend_the_only_the_exhibit_they_can_afford
+    @denver.add_exhibit(@gems_and_minerals)
+    @denver.add_exhibit(@dead_sea_scrolls)
+    @denver.add_exhibit(@imax)
+
+    @bob.add_interest("IMAX")
+    @bob.add_interest("Dead Sea Scrolls")
+
+    @denver.admit(@bob)
+
+    assert_equal 0, @bob.spending_money
   end
 end
