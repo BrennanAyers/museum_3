@@ -55,11 +55,11 @@ class MuseumTest < Minitest::Test
   def test_it_returns_patrons_by_exhibit_interest
     @bob.add_interest("Dead Sea Scrolls")
     @bob.add_interest("Gems and Minerals")
-    @sally.add_interest("IMAX")
+    @sally.add_interest("Dead Sea Scrolls")
 
     @denver.add_exhibit(@gems_and_minerals)
     @denver.add_exhibit(@dead_sea_scrolls)
-    @denver.add_exhibit(@dead_sea_scrolls)
+    @denver.add_exhibit(@imax)
 
     @denver.admit(@bob)
     @denver.admit(@sally)
