@@ -95,4 +95,18 @@ class MuseumTest < Minitest::Test
 
     assert_equal 0, @bob.spending_money
   end
+
+  def test_a_patron_will_only_attend_the_more_expensive_exhibit_they_can_afford
+    @denver.add_exhibit(@gems_and_minerals)
+    @denver.add_exhibit(@dead_sea_scrolls)
+    @denver.add_exhibit(@imax)
+
+    @sally.add_interest("IMAX")
+    @sally.add_interest("Dead Sea Scrolls")
+
+    @denver.admit(@sally)
+
+    assert_equal 5, @sally.spending_money
+  end
+
 end
