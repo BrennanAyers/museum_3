@@ -42,4 +42,14 @@ class MuseumTest < Minitest::Test
     assert_equal [@gems_and_minerals, @dead_sea_scrolls], @denver.recommend_exhibits(@bob)
     assert_equal [@imax], @denver.recommend_exhibits(@sally)
   end
+
+  def test_it_can_admin_patrons
+    assert_equal [], @denver.patrons
+
+    @denver.admit(@bob)
+    @denver.admit(@sally)
+
+    assert_equal [@bob, @sally], @denver.patrons
+  end
+
 end
